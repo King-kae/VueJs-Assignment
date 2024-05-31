@@ -1,5 +1,5 @@
 <script setup>
-    import { defineProps} from "vue"
+    // import { defineProps} from "vue"
     defineProps({
         repos: {
             type: Array,
@@ -18,7 +18,7 @@
         <ul>
             <li v-for="repo in repos" :key="repo.id">
                 <router-link
-                    :to="{ name: 'SingleRepoView', params: { name: repo.name, name: repo.owner.login } }"
+                    :to="{ name: 'SingleRepoView', params: { id: repo.name, name: repo.owner.login } }"
                 >
                     {{ repo.name }}
                 </router-link>
@@ -26,3 +26,7 @@
         </ul>
     </section>
 </template>
+
+<style scoped>
+
+</style>

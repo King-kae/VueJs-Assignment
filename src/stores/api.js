@@ -7,20 +7,20 @@ export const getRepos = async () => {
                 Accept: "application/vnd.github.v3+json"
             }
         });
-        return await repos.json()
+        return await repos;
     } catch (err) {
         console.log(err);
     }
 }
 
-export const getRepo = async (name) => {
+export const getRepo = async (repo) => {
     try {
-        const repo = await axios.get(`https://api.github.com/repos/${name}`, {
+        const repo = await axios.get(`https://api.github.com/repos/Kingkae/${repo}`, {
             headers: {
                 Accept: "application/vnd.github.v3+json"
             }
         });
-        return await repo.json();
+        return await repo;
     } catch (err) {
         console.log(err);
     }

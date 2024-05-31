@@ -1,34 +1,37 @@
 <script setup>
-import { computed, defineProps, onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import{ useRouter } from "vue-router"
+import SingleRepo from "@/components/SingleRepo.vue"
+import axios from "axios"
 
-const props = defineProps(["name"]);
+
+const props = defineProps(["id"]);
 
 const router = useRouter()
 
-// const id = computed(() => props.id)
-const name = computed(() => props.name)
+const id = computed(() => props.id)
+// const name = computed(() => props.name)
 
 const githubRepo = ref(null)
 
 
 
-const getRepo = async (name) => {
+const getRepo = async (repo) => {
     try {
-        const repo = await axios.get(`https://api.github.com/repos/${name}`, {
+        const repoData = await axios.get(`https://api.github.com/repos/King-kae/${repo}`, {
             headers: {
                 Accept: 'application/vnd.github.v3+json'
             }
         })
-        return await repo.json()
+        return await repoData
     } catch (err) {
         console.log(err)
     }
 }
 
 onMounted(() => {
-    getRepo(name.value).then((repo) => {
-        console.log(repo)
+    getRepo(id.value).then((repo) => {
+        console.log(repo.data)
         githubRepo.value = repo.data
     })
 
@@ -42,7 +45,14 @@ onMounted(() => {
 
 
 <template>
-    <section>
-      <h1>{{ name }}</h1>
+    <section v-if="githubRepo">
+        <div>
+            <button @click="router.go(-1)">Back to list</button>
+            <a :href="githubRepo.html_url">Open in Github</a>
+        </div>
+      <h1>{{ id }}</h1>
+        <!-- <h1>{{ githubRepo.name }}</h1> -->
+        <p>{{ githubRepo.language }}</p>
+        <SingleRepo :repo="githubRepo" />
     </section>
 </template>

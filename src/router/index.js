@@ -27,10 +27,32 @@ const router = createRouter({
       
     },
     {
-      path: '/repo/:name',
+      path: '/repo/:name/:id',
       name: "SingleRepoView",
       props: true,
       component: SingleRepoView
+    },
+    {
+      path: '/:catchAll(.*)',
+      name: "not-found",
+      component: () => import("../views/NotFoundView.vue")
+    },
+    {
+      path: '/repo/:afterEvent(.*)',
+      redirect: (to) => {
+        return { path: '/repo/' + to.params.afterEvent }
+      }
+    },
+    {
+      path: "/404/:resource",
+      name: "404Resource",
+      props: true,
+      component: () => import("../views/NotFoundView.vue")
+    },
+    {
+      path: '/network-error',
+      name: 'NetworkError',
+      component: () => import('../views/NetworkErrorView.vue')
     }
   ]
 })
