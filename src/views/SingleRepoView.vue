@@ -3,7 +3,7 @@ import { computed, onMounted, ref } from "vue";
 import{ useRouter } from "vue-router"
 import SingleRepo from "@/components/SingleRepo.vue"
 import axios from "axios"
-
+import { ArrowLeftCircleIcon } from "@heroicons/vue/20/solid"
 
 const props = defineProps(["id"]);
 
@@ -45,14 +45,12 @@ onMounted(() => {
 
 
 <template>
-    <section v-if="githubRepo">
-        <div>
-            <button @click="router.go(-1)">Back to list</button>
-            <a :href="githubRepo.html_url">Open in Github</a>
-        </div>
-      <h1>{{ id }}</h1>
-        <!-- <h1>{{ githubRepo.name }}</h1> -->
-        <p>{{ githubRepo.language }}</p>
-        <SingleRepo :repo="githubRepo" />
+    <main class="py-5">
+        <section v-if="githubRepo">
+            <div class="my-10 flex items-center justify-start gap-x-6">      
+                <a @click="router.go(-1)" class="rounded-md bg-indigo-600 px-3.5 hover:cursor-pointer flex items-center py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"> <ArrowLeftCircleIcon class="h-8 w-auto" />Back to list </a>
+            </div>
+        <SingleRepo :repo="githubRepo" :class="py-8"/>
     </section>
+    </main>
 </template>
