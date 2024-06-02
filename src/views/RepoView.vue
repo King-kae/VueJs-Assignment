@@ -1,5 +1,5 @@
 <script setup>
-import Repos from '../components/Repos.vue'
+import Repos from '../components/HelloWorld.vue'
 </script>
 
 
