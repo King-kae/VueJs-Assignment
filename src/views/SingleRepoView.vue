@@ -43,14 +43,15 @@ onMounted(() => {
 // })
 </script>
 
-
 <template>
-    <main class="py-5">
-        <section v-if="githubRepo">
-            <div class="my-10 flex items-center justify-start gap-x-6">      
-                <a @click="router.go(-1)" class="rounded-md bg-indigo-600 px-3.5 hover:cursor-pointer flex items-center py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"> <ArrowLeftCircleIcon class="h-8 w-auto" />Back to list </a>
-            </div>
-        <SingleRepo :repo="githubRepo" :class="py-8"/>
-    </section>
-    </main>
+    <div v-if="githubRepo">
+        <h1>{{ githubRepo.name }}</h1>
+        <p> Description: {{ githubRepo.description }}</p>
+        <p>{{ githubRepo.language }}</p>
+        <p>Star: {{ githubRepo.stargazers_count }}</p>
+        <p>Fork: {{ githubRepo.forks_count }}</p>
+        <p>Issues: {{ githubRepo.open_issues_count }}</p>
+        <a class="text-indigo-600" :href="githubRepo.html_url">Open in Github</a>
+
+    </div>
 </template>

@@ -1,11 +1,11 @@
 <template>
   <div>
     <h1 class="text-center text-3xl mb-2">MY REPOSITORIES</h1>
-    <form role="search">
+    <!-- <form role="search">
       <label for="search" class="hidden-visually">Search: </label>
       <input type="text" name="search" id="search" v-model="search" />
       <button type="submit">Search</button>
-    </form>
+    </form> -->
     <div class="album py-5 bg-light">
       <div class="" v-cloak>
         <div class="row">
@@ -32,6 +32,8 @@
         <nav class="isolate flex justify-center -space-x-px rounded-md shadow-sm" aria-label="Pagination" >
           <button
             type="button"
+            :to="{ name: 'home', 
+            query: { page: page - 1 } }"
             class="relative inline-flex items-center rounded-l-md px-2 py-2 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 text-indigo-600 focus:z-20 focus:outline-offset-0"
             v-if="page != 1"
             @click="page--"
@@ -52,6 +54,7 @@
           </button>
           <button
             type="button"
+            :to="{ name: 'Home', query: { page: page + 1 } }"
             @click="page++"
             v-if="page < pages.length"
             class="relative inline-flex items-center rounded-r-md px-2 py-2 text-indigo-600 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"

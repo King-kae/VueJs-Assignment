@@ -10,7 +10,11 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      meta: {
+        title: "Home Page",
+        description: "This is the home page"
+      }
     },
     {
       path: '/hello',
@@ -28,7 +32,6 @@ const router = createRouter({
     {
       path: "/repos",
       name: 'repos',
-      props: (route) => ({ page: parseInt(route.query.page) || 1 }),
       component: RepoView,
       
     },
