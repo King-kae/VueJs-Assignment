@@ -45,6 +45,7 @@ onMounted(() => {
 
 <template>
     <div v-if="githubRepo">
+        <ArrowLeftCircleIcon />
         <h1>{{ githubRepo.name }}</h1>
         <p> Description: {{ githubRepo.description }}</p>
         <p>{{ githubRepo.language }}</p>

@@ -14,15 +14,19 @@
             <div class="card mb-4 box-shadow post-cards h-28 text-center">
               <div class="card-body h-full flex justify-between items-center">
                 <p class="card-text">
-                  <router-link
-                    :to="{ name: 'SingleRepoView', params: { id: post.name, name: post.owner.login } }"
-                  >
+                  
                   {{ post.name }}
                     
-                  </router-link>
+                  
                 </p>
                 <p>
-                  <span aria-hidden="true">{{ post.language}}</span>
+                  <span aria-hidden="true">
+                    <router-link
+                      :to="{ name: 'SingleRepoView', params: { id: post.name, name: post.owner.login } }"
+                    >   
+                      View More
+                    </router-link>
+                  </span>
                 </p>
               </div>
             </div>
