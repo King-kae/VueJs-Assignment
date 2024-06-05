@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import RepoView from '@/views/RepoView.vue'
 import SingleRepoView from '@/views/SingleRepoView.vue'
-import HelloWorld from '@/components/HelloWorld.vue'
+import HelloWorld from '@/components/Repos.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,11 +17,6 @@ const router = createRouter({
       }
     },
     {
-      path: '/hello',
-      name: 'hello',
-      component: HelloWorld
-    },
-    {
       path: '/about',
       name: 'about',
       // route level code-splitting
@@ -33,7 +28,7 @@ const router = createRouter({
       path: "/repos",
       name: 'repos',
       component: RepoView,
-      
+
     },
     {
       path: '/repo/:name/:id',
@@ -53,9 +48,8 @@ const router = createRouter({
       }
     },
     {
-      path: "/404/:resource",
+      path: "/404",
       name: "404Resource",
-      props: true,
       component: () => import("../views/NotFoundView.vue")
     },
     {

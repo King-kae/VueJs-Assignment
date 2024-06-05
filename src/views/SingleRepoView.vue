@@ -25,34 +25,41 @@ const getRepo = async (repo) => {
         })
         return await repoData
     } catch (err) {
-        console.log(err)
+        console.log(err.message)
     }
 }
 
 onMounted(() => {
-    getRepo(id.value).then((repo) => {
-        console.log(repo.data)
+    getRepo(id.value)
+    .then((repo) => {
         githubRepo.value = repo.data
+    }).catch((error) => {
+        if (error.response && error.response.status == 404) {
+        router.push({
+          name: '404Resource',
+        })
+      } else {
+        router.push({ name: 'NetworkError' })
+      }
     })
 
-})
 
-// getRepo().then((repo) => {
-//     console.log(repo)
-//     githubRepo.value = repo.data
-// })
+})
 </script>
 
 <template>
-    <div v-if="githubRepo">
-        <ArrowLeftCircleIcon />
-        <h1>{{ githubRepo.name }}</h1>
-        <p> Description: {{ githubRepo.description }}</p>
-        <p>{{ githubRepo.language }}</p>
-        <p>Star: {{ githubRepo.stargazers_count }}</p>
-        <p>Fork: {{ githubRepo.forks_count }}</p>
-        <p>Issues: {{ githubRepo.open_issues_count }}</p>
-        <a class="text-indigo-600" :href="githubRepo.html_url">Open in Github</a>
-
-    </div>
+    <section v-if="githubRepo" class="py-5">
+        <div class="my-10 flex items-center justify-start gap-x-6">      
+            <a @click="router.go(-1)" class="rounded-md bg-indigo-600 px-3.5 hover:cursor-pointer flex items-center py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"> <ArrowLeftCircleIcon class="h-8 w-auto" />Back to list </a>
+        </div>
+        <div class="mx-auto flex flex-col justify-center items-center">
+            <h1>{{ githubRepo.name }}</h1>
+            <p> Description: {{ githubRepo.description }}</p>
+            <p>Language: {{ githubRepo.language }}</p>
+            <p>Star: {{ githubRepo.stargazers_count }}</p>
+            <p>Fork: {{ githubRepo.forks_count }}</p>
+            <p>Issues: {{ githubRepo.open_issues_count }}</p>
+            <a class="text-indigo-600" :href="githubRepo.html_url">Open in Github</a>           
+        </div>
+    </section>
 </template>

@@ -30,9 +30,18 @@ const getRepo = async (repo) => {
 }
 
 onMounted(() => {
-    getRepo(id.value).then((repo) => {
+    getRepo(id.value)
+    .then((repo) => {
         console.log(repo.data)
         githubRepo.value = repo.data
+    }).catch((error) => {
+        if (error.response && error.response.status == 404) {
+        router.push({
+          name: '404Resource',
+        })
+      } else {
+        router.push({ name: 'NetworkError' })
+      }
     })
 
 })

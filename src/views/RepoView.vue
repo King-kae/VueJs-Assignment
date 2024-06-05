@@ -1,7 +1,6 @@
 <script setup>
-import Repos from '../components/HelloWorld.vue'
+import Repos from '../components/Repos.vue'
 </script>
-
 
 <template>
   <main>
